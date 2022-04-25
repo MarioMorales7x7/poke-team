@@ -1,65 +1,34 @@
-import { useEffect } from 'react/cjs/react.production.min';
+import { useEffect, useState } from 'react';
 import PokeAPI from '../api/PokeAPI';
-import PokemonList from '../components/pokemons/PokemonList'
+import PokemonList from '../components/PokemonList';
 
-const SAMPLE_POKEMON = [
-  {
-    id: 'p1',
-    poke_name: 'Cyndaquil',
-    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/155.png",
-    type: 'Fire',
-    description: 'It is timid, and\nalways curls it­\nself up in a ball.\fIf attacked, it\nflares up its back\nfor protection.'
-  },
-  {
-    id: 'p2',
-    poke_name: 'Totodile',
-    image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/158.png',
-    type: 'Water',
-    description: "Its well-developed\njaws are powerful\nand capable of\fcrushing anything.\nEven its trainer\nmust be careful."
-  },
-  {
-    id: 'p3',
-    poke_name: 'Chikorita',
-    image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/152.png',
-    type: 'Grass',
-    description: "A sweet aroma\ngently wafts from\nthe leaf on its\fhead. It is docile\nand loves to soak\nup the sun's rays."
-  },
-  {
-    id: 'p4',
-    poke_name: 'Kyogre',
-    image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/382.png',
-    type: 'Water',
-    description: "That's a big fuckin fish"
-  }
-];
-
-
-
-
-function CreateTeamPage(){
-
+function CreateTeamPage(props){
+  
   // states
   const [pokemonData, setPokemonData] = useState([])
-
+  
+  //event handler
   const loadPokemon = async () => {
-    const data = await PokeAPI.getAllPokemon()
-    if (data) {
-      console.log(data)
-      setPokemonData(data)
-    }
+    const filteredPokemonData = await PokeAPI.getAllPokemon()
+      // set a data variable, wait for load pokemon to load...then call API here.
+      console.log(filteredPokemonData)
+      // console.log(data)
+      //if data within API call exists then return the values of that data and set it as the current value.
+       setPokemonData(filteredPokemonData)
   }
 
+// effects
   useEffect(() => {
     loadPokemon()
-  }, [])
-
+  }, [props.username])
+  
+            
   return (
     <div>
       <h1>Create Team Page</h1>
       <h3>Choose your Pokemon!</h3>
-      <PokemonList pokemons={pokemonData} />
+      <PokemonList pokemonData={pokemonData} />
     </div>
   );
 }
-
 export default CreateTeamPage;

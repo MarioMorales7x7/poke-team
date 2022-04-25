@@ -1,18 +1,33 @@
 import { Routes, Route, HashRouter } from 'react-router-dom';
+import { useState } from 'react'
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 import CreateTeamPage from './pages/CreateTeamPage';
 import YourTeamPage from './pages/YourTeamPage';
-import Layout from './components/layout/Layout';
+import MainHeader  from './components/MainHeader';
 
 function App() {
+  
+  //state value
+  const [username, setUsername] = useState("")
+
+
   return (
-   <Layout>
+    <div className="App">
+      <HashRouter>
+        <MainHeader title="Pokemon Team App" username={ username } setUsername={ setUsername } />
+
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage username= { username }/>} />
+        <Route path="/login" element={<LoginPage setUsername={ setUsername } />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/create-team" element={<CreateTeamPage /> } />
         <Route path="/your-team" element={<YourTeamPage />} />
       </Routes>
-    </Layout>
+
+      </HashRouter>
+    </div>
   );
 }
 
