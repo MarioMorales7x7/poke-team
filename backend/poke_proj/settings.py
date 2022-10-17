@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'poke_proj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pokemon_db',
+        'NAME': 'poke_db',
     }
 }
 

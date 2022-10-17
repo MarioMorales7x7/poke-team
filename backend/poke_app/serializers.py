@@ -16,10 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
 class PokemonTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = PokemonTeam
-        fields = ['id', 'team_name', 'creator']
+        fields = ['id', 'team_name', 'creator', 'pokemon']
 
 
 class PokemonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pokemon
-        fields = ['name', 'description', 'type']
+        fields = ['name', 'description', 'img_url']
